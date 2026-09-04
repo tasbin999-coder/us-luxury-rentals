@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StaySuite - Luxury Hotels, Vacation Rentals & Oceanfront Villas</title>
     
     <!-- SEO Primary Meta Tags -->
-    <meta name="description" content="Book top-rated luxury hotels, beachfront villas, and executive penthouses across the US and Canada with instant confirmation and 24/7 support.">
-    <meta name="robots" content="index, follow">
-
+    <title>Booking.com - Official Site | Hotels, Flights, Car Rentals & Attractions</title>
+    <meta name="title" content="Booking.com - Official Site | Hotels, Flights & More">
+    <meta name="description" content="Book top-rated hotels, vacation rentals, flights, and car rentals worldwide with instant confirmation and 24/7 customer support.">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -18,79 +18,166 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        #map { height: 100%; min-height: 350px; border-radius: 1rem; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f5f5f5; }
+        .bk-blue { background-color: #003580; }
+        .bk-blue-text { color: #003580; }
+        .bk-yellow { background-color: #febb02; }
+        .bk-yellow-text { color: #febb02; }
+        #map { height: 100%; min-height: 350px; border-radius: 0.75rem; }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800">
+<body class="text-slate-800">
 
-    <!-- Header Navigation (Booking.com Dark Blue Style) -->
-    <header class="bg-[#003580] text-white sticky top-0 z-40 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center font-black text-[#003580] text-lg shadow">
-                    S
-                </div>
-                <span class="text-xl font-black tracking-tight">StaySuite</span>
+    <!-- Header Navigation (Booking.com Style) -->
+    <header class="bk-blue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-2xl font-black tracking-tight text-white">Booking.com</a>
             </div>
             
-            <nav class="hidden md:flex items-center gap-6 font-semibold text-xs">
-                <a href="#search" class="hover:text-amber-400 transition-colors">Search Stays</a>
-                <a href="#featured" class="hover:text-amber-400 transition-colors">Properties</a>
-                <a href="#map-section" class="hover:text-amber-400 transition-colors">Map View</a>
-                <a href="#reviews-section" class="hover:text-amber-400 transition-colors">Reviews</a>
-                <a href="#support" class="hover:text-amber-400 transition-colors">Support</a>
-            </nav>
+            <div class="flex items-center gap-3">
+                <button class="bg-white bk-blue-text px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-100 transition hidden sm:block">List your property</button>
+                <button class="bg-white bk-blue-text px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-100 transition">Register</button>
+                <button class="bg-white bk-blue-text px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-100 transition">Sign in</button>
+                <div class="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center font-bold text-xs border border-white/30 cursor-pointer">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub Navigation Tabs (Stays, Flights, Car rentals, Attractions, Taxis) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto pb-3 text-sm no-scrollbar">
+            <button onclick="switchTab('stays')" id="tab-stays" class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 bg-white/10 font-semibold text-white whitespace-nowrap transition">
+                <i class="fa-solid fa-bed"></i> Stays
+            </button>
+            <button onclick="switchTab('flights')" id="tab-flights" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
+                <i class="fa-solid fa-plane"></i> Flights
+            </button>
+            <button onclick="switchTab('cars')" id="tab-cars" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
+                <i class="fa-solid fa-car"></i> Car rentals
+            </button>
+            <button onclick="switchTab('attractions')" id="tab-attractions" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
+                <i class="fa-solid fa-ferris-wheel"></i> Attractions
+            </button>
+            <button onclick="switchTab('taxis')" id="tab-taxis" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
+                <i class="fa-solid fa-taxi"></i> Airport taxis
+            </button>
         </div>
     </header>
 
-    <!-- Yellow Search Hero Bar (Booking.com Mobile Style) -->
-    <section id="search" class="bg-[#003580] px-3 pb-8 pt-2">
-        <div class="max-w-3xl mx-auto bg-[#febb02] rounded-2xl p-3.5 shadow-2xl space-y-2.5">
-            <!-- Location Text Input -->
-            <div class="bg-white rounded-xl px-3.5 py-2.5 flex items-center gap-2.5 border-2 border-amber-400">
-                <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
-                <input type="text" id="destination" placeholder="Where are you going?" oninput="filterHotels()" class="w-full text-xs md:text-sm font-semibold bg-transparent focus:outline-none text-slate-900">
-            </div>
-
-            <!-- Date Selection Row -->
-            <div class="grid grid-cols-2 gap-2">
-                <div class="bg-white rounded-xl p-2.5 border border-slate-200">
-                    <span class="text-[9px] uppercase font-bold text-slate-400 block">Check-in date</span>
-                    <input type="date" id="checkin" value="2026-09-10" class="text-xs font-bold bg-transparent w-full focus:outline-none mt-0.5 text-slate-800" onchange="calculateTotal()">
+    <!-- Search Hero Bar (Exact Booking.com Yellow Container Style) -->
+    <section class="bk-blue pb-10 pt-4 px-3 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Dynamic Tab Forms -->
+            
+            <!-- STAYS FORM -->
+            <div id="form-stays" class="bg-[#febb02] p-2 rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-12 gap-2">
+                <!-- Location Input -->
+                <div class="md:col-span-4 bg-white rounded-lg p-2.5 flex items-center gap-3 border-2 border-transparent focus-within:border-blue-600">
+                    <i class="fa-solid fa-bed text-slate-400 text-lg"></i>
+                    <div class="w-full">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase">Where are you going?</label>
+                        <input type="text" id="destination" value="El Paso" class="w-full font-semibold text-sm focus:outline-none bg-transparent">
+                    </div>
                 </div>
-                <div class="bg-white rounded-xl p-2.5 border border-slate-200">
-                    <span class="text-[9px] uppercase font-bold text-slate-400 block">Check-out date</span>
-                    <input type="date" id="checkout" value="2026-09-12" class="text-xs font-bold bg-transparent w-full focus:outline-none mt-0.5 text-slate-800" onchange="calculateTotal()">
+
+                <!-- Dates Input -->
+                <div class="md:col-span-4 bg-white rounded-lg p-2 flex items-center gap-2 border-2 border-transparent">
+                    <i class="fa-solid fa-calendar-days text-slate-400 text-lg ml-1"></i>
+                    <div class="w-1/2">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase">Check-in date</label>
+                        <input type="date" id="checkin" value="2026-09-04" class="w-full font-semibold text-xs focus:outline-none bg-transparent" onchange="calculateTotal()">
+                    </div>
+                    <div class="w-1/2 border-l pl-2">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase">Check-out date</label>
+                        <input type="date" id="checkout" value="2026-09-05" class="w-full font-semibold text-xs focus:outline-none bg-transparent" onchange="calculateTotal()">
+                    </div>
+                </div>
+
+                <!-- Guests / Rooms Input -->
+                <div class="md:col-span-2 bg-white rounded-lg p-2.5 flex items-center gap-3">
+                    <i class="fa-solid fa-person text-slate-400 text-lg"></i>
+                    <div class="w-full">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase">Guests & Rooms</label>
+                        <select id="rooms" onchange="calculateTotal()" class="w-full font-semibold text-xs focus:outline-none bg-transparent">
+                            <option value="1">2 adults · 0 children · 1 room</option>
+                            <option value="2">4 adults · 0 children · 2 rooms</option>
+                            <option value="3">6 adults · 0 children · 3 rooms</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Search Button -->
+                <div class="md:col-span-2">
+                    <button onclick="filterHotels()" class="w-full h-full bg-[#0071c2] hover:bg-[#00487a] text-white font-bold py-3 px-4 rounded-lg shadow transition text-base flex items-center justify-center gap-2">
+                        Search
+                    </button>
                 </div>
             </div>
 
-            <!-- Rooms Selection Row -->
-            <div class="bg-white rounded-xl p-2.5 border border-slate-200">
-                <span class="text-[9px] uppercase font-bold text-slate-400 block">Rooms</span>
-                <select id="rooms" onchange="calculateTotal()" class="w-full bg-transparent text-xs font-bold focus:outline-none mt-0.5 text-slate-800">
-                    <option value="1">1 Room</option>
-                    <option value="2">2 Rooms</option>
-                    <option value="3">3 Rooms</option>
-                    <option value="4">4 Rooms</option>
-                </select>
+            <!-- FLIGHTS FORM (Hidden by default) -->
+            <div id="form-flights" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
+                <div class="bg-white rounded-lg p-4 space-y-3">
+                    <div class="flex gap-4 text-xs font-bold text-slate-700">
+                        <label class="flex items-center gap-1"><input type="radio" name="flight-type" checked> Round-trip</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="flight-type"> One-way</label>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+                        <input type="text" placeholder="From where?" class="border p-2.5 rounded-lg text-sm font-semibold">
+                        <input type="text" placeholder="To where?" class="border p-2.5 rounded-lg text-sm font-semibold">
+                        <input type="date" value="2026-09-07" class="border p-2.5 rounded-lg text-sm font-semibold">
+                        <button class="bg-[#0071c2] text-white font-bold py-2.5 rounded-lg">Search flights</button>
+                    </div>
+                </div>
             </div>
 
-            <button onclick="filterHotels()" class="w-full bg-[#0066f0] hover:bg-[#004bb5] text-white font-bold py-3 rounded-xl shadow transition text-xs uppercase tracking-wider">
-                Search
-            </button>
+            <!-- CAR RENTALS FORM (Hidden by default) -->
+            <div id="form-cars" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
+                <div class="bg-white rounded-lg p-4 grid grid-cols-1 md:grid-cols-4 gap-2">
+                    <input type="text" placeholder="Pick-up location" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <input type="date" value="2026-09-07" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <input type="date" value="2026-09-10" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <button class="bg-[#0071c2] text-white font-bold py-2.5 rounded-lg">Search cars</button>
+                </div>
+            </div>
+
+            <!-- ATTRACTIONS FORM (Hidden by default) -->
+            <div id="form-attractions" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
+                <div class="bg-white rounded-lg p-4 grid grid-cols-1 md:grid-cols-3 gap-2">
+                    <input type="text" placeholder="Where are you going?" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <input type="date" value="2026-09-07" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <button class="bg-[#0071c2] text-white font-bold py-2.5 rounded-lg">Search activities</button>
+                </div>
+            </div>
+
+            <!-- TAXIS FORM (Hidden by default) -->
+            <div id="form-taxis" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
+                <div class="bg-white rounded-lg p-4 grid grid-cols-1 md:grid-cols-4 gap-2">
+                    <input type="text" placeholder="Enter pick-up location" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <input type="text" placeholder="Enter destination" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <input type="date" value="2026-09-12" class="border p-2.5 rounded-lg text-sm font-semibold">
+                    <button class="bg-[#0071c2] text-white font-bold py-2.5 rounded-lg">Search taxi</button>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto px-3 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Left Column: Hotel Listings (Left Text, Right Image layout as requested) -->
-        <div id="featured" class="lg:col-span-7 space-y-4">
-            <div class="flex justify-between items-center px-1">
-                <h2 class="text-base font-extrabold text-slate-900">Available Properties</h2>
-                <span class="text-xs text-slate-500">Click photo to view details</span>
+        <!-- Left Column: Property Listings & Map View -->
+        <div class="lg:col-span-7 space-y-4">
+            
+            <div class="flex justify-between items-center bg-white p-3 rounded-lg border shadow-sm">
+                <div>
+                    <h2 class="font-bold text-base text-slate-900">El Paso: properties found</h2>
+                    <p class="text-xs text-slate-500">Prices often go up, lock in a great price today!</p>
+                </div>
+                <button onclick="scrollToMap()" class="px-3 py-1.5 bg-blue-50 text-[#0071c2] font-bold rounded text-xs hover:bg-blue-100 transition flex items-center gap-1.5">
+                    <p><i class="fa-solid fa-map-location-dot"></i> Show on map</p>
+                </button>
             </div>
 
             <!-- Hotel List Container -->
@@ -98,282 +185,224 @@
                 <!-- Dynamically Rendered via JS -->
             </div>
 
-            <!-- Guest Reviews Section -->
-            <div id="reviews-section" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 mt-6">
-                <h3 class="text-sm font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-star text-amber-500"></i> Verified Guest Reviews
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5">
-                        <div class="flex justify-between items-center font-bold">
-                            <span>Sarah M.</span>
-                            <span class="text-amber-500"><i class="fa-solid fa-star"></i> 5.0</span>
-                        </div>
-                        <p class="text-slate-600">"Smooth booking process using my Amex card. Received instant confirmation!"</p>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5">
-                        <div class="flex justify-between items-center font-bold">
-                            <span>David K.</span>
-                            <span class="text-amber-500"><i class="fa-solid fa-star"></i> 4.9</span>
-                        </div>
-                        <p class="text-slate-600">"The Booking.com support integration was very helpful. Excellent view."</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Map View Section -->
-            <div id="map-section" class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm mt-6">
-                <h3 class="text-sm font-bold mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-map-pin text-amber-500"></i> Interactive Property Map
+            <div id="map-section" class="bg-white p-4 rounded-xl border shadow-sm mt-6">
+                <h3 class="font-bold text-sm mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-map-pin text-red-500"></i> Interactive Hotel Map
                 </h3>
-                <div id="map"></div>
+                <div id="map" class="shadow-inner"></div>
             </div>
         </div>
 
-        <!-- Right Column: Booking Details & Checkout Card -->
-        <div class="lg:col-span-5 space-y-6">
+        <!-- Right Column: Booking Details, Summary & Affiliate Action -->
+        <div class="lg:col-span-5 space-y-4">
 
-            <!-- Selected Hotel Booking Card -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-5 sticky top-20">
-                <div class="flex justify-between items-start mb-3 border-b pb-3">
+            <div class="bg-white rounded-xl border shadow-lg p-5 sticky top-20">
+                <div class="border-b pb-3 mb-3">
+                    <span id="selected-type" class="text-[10px] font-bold uppercase text-amber-800 bg-amber-100 px-2 py-0.5 rounded">Hotel Stay</span>
+                    <h3 id="selected-title" class="text-lg font-extrabold text-slate-900 mt-1">Americas Hotel - El Paso Airport</h3>
+                    <p id="selected-location" class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-slate-400"></i> El Paso · 5.4 km from centre</p>
+                </div>
+
+                <div class="flex justify-between items-center mb-4 bg-slate-50 p-3 rounded-lg border">
                     <div>
-                        <span id="selected-type" class="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">Oceanfront Villa</span>
-                        <h3 id="selected-title" class="text-base font-extrabold text-slate-900 mt-1">Modern Oceanfront Villa in Miami</h3>
-                        <p id="selected-location" class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-slate-400"></i> South Beach, Miami, FL</p>
+                        <span class="text-xs text-slate-500 block">Rate per night</span>
+                        <span id="selected-price" class="text-xl font-black text-slate-900">$ 75</span>
                     </div>
-                    <div class="text-right">
-                        <span id="selected-price" class="text-xl font-black text-blue-950">$ 450</span>
-                        <span class="text-[10px] text-slate-400 block">/ night</span>
-                    </div>
-                </div>
-
-                <!-- Status Badges -->
-                <div class="mb-3 flex flex-wrap gap-1.5 text-[10px]">
-                    <span id="stock-badge" class="bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-amber-200">
-                        <i class="fa-solid fa-box-open"></i> Limited Inventory
-                    </span>
-                    <span class="bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-blue-200">
-                        <i class="fa-solid fa-shield-halved"></i> Confirmed Booking
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">
+                        <i class="fa-solid fa-check"></i> Free cancellation
                     </span>
                 </div>
 
-                <!-- Notice Alert -->
-                <div id="availability-alert" class="hidden mb-3 p-2.5 bg-amber-50 border border-amber-300 rounded-xl text-[11px] text-amber-900 space-y-1">
-                    <p class="font-bold flex items-center gap-1 text-amber-800">
-                        <i class="fa-solid fa-circle-exclamation text-amber-600"></i> Notice: Selected Option Currently Unavailable
-                    </p>
-                    <p class="text-[10px] text-amber-800">Certain room types are out of stock for your selected dates.</p>
-                </div>
-
-                <!-- Room Category Selection -->
-                <div class="mb-4 space-y-2 text-xs">
-                    <label class="block font-bold text-slate-700">Select Room / Suite Category:</label>
-                    <select id="room-type-select" onchange="calculateTotal()" class="w-full bg-slate-100 border border-slate-300 rounded-lg p-2 font-semibold focus:outline-none">
-                        <option value="standard" data-multiplier="1" data-available="true">Standard Deluxe Villa (Available)</option>
-                        <option value="executive" data-multiplier="1.3" data-available="true">Ocean View Executive Suite (+30%)</option>
-                        <option value="suite" data-multiplier="1.8" data-available="false">Presidential Penthouse (Out of Stock)</option>
+                <!-- Room Configuration Options -->
+                <div class="mb-4 space-y-2">
+                    <label class="block text-xs font-bold text-slate-700">Select Room Option:</label>
+                    <select id="room-type-select" onchange="calculateTotal()" class="w-full bg-slate-100 border rounded-lg p-2.5 text-xs font-semibold focus:outline-none">
+                        <option value="standard" data-multiplier="1">Standard Double Room ($75/night)</option>
+                        <option value="executive" data-multiplier="1.4">Executive Suite with Breakfast ($105/night)</option>
+                        <option value="deluxe" data-multiplier="1.9">Deluxe King Room Sea View ($145/night)</option>
                     </select>
                 </div>
 
-                <!-- Add-on Services -->
-                <div class="mb-4 text-xs">
-                    <h4 class="font-bold text-slate-900 mb-2 uppercase tracking-wider">Add Extra Services:</h4>
-                    <div class="space-y-1.5">
-                        <label class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-100">
-                            <span class="flex items-center gap-2">
-                                <input type="checkbox" id="addon-breakfast" class="rounded text-blue-600" onchange="calculateTotal()">
-                                <i class="fa-solid fa-utensils text-amber-500"></i> Daily Gourmet Breakfast
-                            </span>
-                            <span class="font-bold text-slate-700">+ $ 35</span>
-                        </label>
-                        <label class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-100">
-                            <span class="flex items-center gap-2">
-                                <input type="checkbox" id="addon-pickup" class="rounded text-blue-600" onchange="calculateTotal()">
-                                <i class="fa-solid fa-car text-blue-500"></i> VIP Airport Transfer
-                            </span>
-                            <span class="font-bold text-slate-700">+ $ 90</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Price Calculation Summary -->
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5 text-xs mb-4">
+                <!-- Dynamic Calculation Summary -->
+                <div class="bg-slate-50 p-3 rounded-lg border space-y-1.5 text-xs mb-4">
                     <div class="flex justify-between text-slate-600">
-                        <span>Stay Duration (<span id="calc-nights">2</span> nights, <span id="calc-rooms-count">1</span> room):</span>
-                        <span id="calc-base">$ 900</span>
+                        <span>Duration (<span id="calc-nights">1</span> night):</span>
+                        <span id="calc-base">$ 75</span>
                     </div>
                     <div class="flex justify-between text-slate-600">
-                        <span>Extra Add-ons:</span>
-                        <span id="calc-addons">$ 0</span>
+                        <span>Taxes & Fees (10%):</span>
+                        <span id="calc-tax">$ 8</span>
                     </div>
-                    <div class="border-t pt-1.5 flex justify-between font-extrabold text-slate-900 text-sm">
+                    <div class="border-t pt-2 flex justify-between font-extrabold text-slate-900 text-sm">
                         <span>Total Price:</span>
-                        <span id="calc-total" class="text-blue-950">$ 900</span>
+                        <span id="calc-total" class="text-[#0071c2]">$ 83</span>
                     </div>
                 </div>
 
-                <!-- Payment Options -->
-                <div class="mb-4 text-xs">
-                    <label class="block font-bold text-slate-700 mb-1.5 uppercase">Payment Method:</label>
-                    <div class="grid grid-cols-3 gap-1.5 text-center mb-2">
-                        <label class="border rounded-lg p-1.5 cursor-pointer bg-white font-bold hover:border-blue-600 flex flex-col items-center gap-0.5">
-                            <input type="radio" name="payment" value="Visa / Mastercard" checked class="hidden">
-                            <i class="fa-brands fa-cc-visa text-blue-700 text-base"></i> Visa / Master
+                <!-- Payment Methods (US & Global Credit Cards) -->
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Accepted Payment Cards:</label>
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
+                            <input type="radio" name="payment" value="Visa" checked class="hidden">
+                            <i class="fa-brands fa-cc-visa text-blue-700 text-lg"></i> Visa
                         </label>
-                        <label class="border rounded-lg p-1.5 cursor-pointer bg-white font-bold hover:border-blue-600 flex flex-col items-center gap-0.5">
-                            <input type="radio" name="payment" value="American Express" class="hidden">
-                            <i class="fa-brands fa-cc-amex text-cyan-600 text-base"></i> Amex
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
+                            <input type="radio" name="payment" value="Mastercard" class="hidden">
+                            <i class="fa-brands fa-cc-mastercard text-red-600 text-lg"></i> Master
                         </label>
-                        <label class="border rounded-lg p-1.5 cursor-pointer bg-white font-bold hover:border-blue-600 flex flex-col items-center gap-0.5">
-                            <input type="radio" name="payment" value="Apple Pay" class="hidden">
-                            <i class="fa-brands fa-apple text-slate-800 text-base"></i> Apple Pay
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
+                            <input type="radio" name="payment" value="Amex" class="hidden">
+                            <i class="fa-brands fa-cc-amex text-cyan-600 text-lg"></i> Amex
+                        </label>
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
+                            <input type="radio" name="payment" value="PayPal" class="hidden">
+                            <i class="fa-brands fa-paypal text-blue-800 text-lg"></i> PayPal
                         </label>
                     </div>
                 </div>
 
-                <!-- Booking Action Button -->
-                <button id="book-now-btn" onclick="confirmBooking()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-circle-check"></i> Confirm Reservation & Get PDF Voucher
+                <!-- Booking / Affiliate Confirm Action -->
+                <button onclick="confirmBooking()" class="w-full bg-[#0071c2] hover:bg-[#00487a] text-white font-bold py-3.5 rounded-lg shadow transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-lock"></i> Reserve & Get PDF Voucher
                 </button>
             </div>
 
-            <!-- Booking.com Partner Support Section -->
-            <div id="support" class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white rounded-2xl p-5 shadow-xl border border-blue-800">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center font-bold text-blue-950 text-base shadow">
+            <!-- Booking.com Support Desk Widget -->
+            <div class="bg-blue-900 text-white rounded-xl p-4 shadow-md">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-[#febb02] rounded-full flex items-center justify-center font-bold text-blue-950">
                         <i class="fa-solid fa-headset"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm">Booking.com Partner Support</h4>
-                        <p class="text-[10px] text-blue-200">Official Customer & Partner Care</p>
+                        <h4 class="font-bold text-sm">Booking.com Support</h4>
+                        <p class="text-[11px] text-blue-200">24/7 Global Partner Desk</p>
                     </div>
                 </div>
-                <p class="text-xs text-blue-100 mb-3 leading-relaxed">
-                    For booking inquiries or cancellations, access official Booking.com partner help portals.
-                </p>
-                <div class="space-y-1.5 text-xs">
-                    <button onclick="openChat()" class="w-full bg-amber-500 hover:bg-amber-600 text-blue-950 font-bold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-comments"></i> Start Live Chat
-                    </button>
-                    <a href="https://www.booking.com/help.html" target="_blank" rel="noopener noreferrer" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-2 rounded-xl text-center border border-white/20 transition block">
-                        Customer Help Center
-                    </a>
-                </div>
+                <p class="text-xs text-blue-100 mb-3">Manage or modify your active booking instantly via official support live chat.</p>
+                <button onclick="openChat()" class="w-full bg-[#febb02] hover:bg-amber-400 text-blue-950 font-black py-2.5 rounded-lg text-xs transition">
+                    Start Live Support Chat
+                </button>
             </div>
 
         </div>
     </main>
 
-    <!-- Property Detail Modal (Opens when photo is clicked) -->
-    <div id="detail-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-5 relative space-y-4">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 font-bold flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 id="modal-title" class="text-lg font-bold text-slate-900">Property Details</h3>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <img id="modal-img-1" src="" alt="View 1" class="rounded-xl h-44 w-full object-cover">
-                <img id="modal-img-2" src="" alt="View 2" class="rounded-xl h-44 w-full object-cover">
-            </div>
-
-            <div class="space-y-2 text-xs text-slate-700">
-                <p><strong>Address:</strong> <span id="modal-address"></span></p>
-                <p><strong>Rating:</strong> <span id="modal-rating" class="text-amber-500 font-bold"></span></p>
-                <p class="bg-blue-50 p-3 rounded-xl text-blue-900"><i class="fa-solid fa-circle-info"></i> All reservations include free Wi-Fi, air conditioning, access to swimming pool, and 24/7 customer service support.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hidden Printable Voucher Template -->
+    <!-- Hidden Printable Voucher Template (For html2pdf) -->
     <div class="hidden">
         <div id="pdf-voucher" class="p-8 bg-white text-slate-800 max-w-2xl mx-auto border-2 border-slate-200">
             <div class="flex justify-between items-center border-b pb-4 mb-6">
                 <div>
-                    <h1 class="text-xl font-bold text-blue-900">StaySuite Booking Voucher</h1>
+                    <h1 class="text-2xl font-bold text-[#003580]">Booking.com Voucher</h1>
                     <p class="text-xs text-slate-500">Official Reservation Confirmation</p>
                 </div>
                 <div class="text-right">
                     <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">CONFIRMED</span>
-                    <p class="text-xs text-slate-400 mt-1">Booking ID: BK-984210</p>
+                    <p class="text-xs text-slate-400 mt-1">Confirmation No: <span id="voucher-id">BK-789421</span></p>
                 </div>
             </div>
-            <div class="space-y-2 text-xs">
-                <p><strong>Property:</strong> <span id="v-hotel"></span></p>
-                <p><strong>Location:</strong> <span id="v-location"></span></p>
-                <p><strong>Check-in / Check-out:</strong> <span id="v-checkin"></span> to <span id="v-checkout"></span></p>
-                <p><strong>Total Paid Amount:</strong> <span id="v-total" class="font-bold text-blue-900"></span></p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                <div>
+                    <p class="text-xs text-slate-400 uppercase font-bold">Property Name</p>
+                    <p id="v-hotel" class="font-bold text-slate-900">Americas Hotel - El Paso Airport</p>
+                    <p id="v-location" class="text-xs text-slate-600">El Paso, TX</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400 uppercase font-bold">Check-in / Check-out</p>
+                    <p class="font-bold text-slate-900"><span id="v-checkin"></span> to <span id="v-checkout"></span></p>
+                </div>
+            </div>
+
+            <div class="border-t border-b py-4 mb-6 space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span>Selected Option:</span>
+                    <span id="v-room" class="font-bold">Standard Double Room</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Total Amount Paid:</span>
+                    <span id="v-total" class="font-bold text-[#003580]">$ 83</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Payment Method:</span>
+                    <span id="v-payment" class="font-bold text-emerald-600">Visa Card</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-xs text-slate-500">
+                <p>For support or changes, visit Booking.com Help Center.<br>Powered by Official Affiliate Partner Program</p>
+                <div class="w-16 h-16 bg-slate-200 flex items-center justify-center font-bold text-slate-400 text-[10px]">
+                    QR CODE
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Live Chat Modal -->
-    <div id="chat-modal" class="fixed bottom-6 right-6 w-80 bg-white rounded-2xl shadow-2xl border z-50 hidden">
-        <div class="bg-blue-900 text-white p-3 rounded-t-2xl flex justify-between items-center text-xs">
-            <span class="font-bold">Booking.com Support Desk</span>
+    <!-- Booking.com Live Chat Modal -->
+    <div id="chat-modal" class="fixed bottom-4 right-4 w-80 bg-white rounded-xl shadow-2xl border z-50 hidden">
+        <div class="bk-blue text-white p-3 rounded-t-xl flex justify-between items-center">
+            <span class="font-bold text-xs">Booking.com Support Live Chat</span>
             <button onclick="closeChat()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div id="chat-messages" class="p-3 h-48 overflow-y-auto space-y-2 text-xs bg-slate-50">
-            <div class="bg-white p-2 rounded-lg border">Hello! How can we assist you with your booking today?</div>
+        <div id="chat-messages" class="p-3 h-48 overflow-y-auto space-y-2 text-xs">
+            <div class="bg-slate-100 p-2.5 rounded-lg text-slate-800">
+                Hello! Welcome to Booking.com customer support desk. How can we help you today?
+            </div>
         </div>
-        <div class="p-2 border-t flex gap-1">
-            <input type="text" id="chat-input" placeholder="Type message..." class="w-full bg-slate-100 border rounded px-2 py-1 text-xs focus:outline-none">
-            <button onclick="sendMessage()" class="bg-blue-900 text-white px-3 rounded text-xs font-bold"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="p-2 border-t flex gap-2">
+            <input type="text" id="chat-input" placeholder="Type message..." class="w-full border rounded px-2 py-1.5 text-xs focus:outline-none">
+            <button onclick="sendMessage()" class="bk-blue text-white px-3 rounded text-xs font-bold"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <!-- Leaflet JS -->
+    <!-- Leaflet JS for Maps -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        // Property Data Matching the User Screenshot
         const hotels = [
             {
                 id: 1,
-                name: "Modern Oceanfront Villa in Miami",
-                type: "Oceanfront Villa",
-                location: "Miami",
-                address: "South Beach, Miami, FL, USA",
-                priceUSD: 450,
-                rating: 4.95,
-                reviews: 142,
-                images: [
-                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80"
-                ],
-                lat: 25.7617,
-                lng: -80.1918
+                name: "Americas Hotel - El Paso Airport / Medical Center",
+                type: "Hotel",
+                location: "El Paso",
+                address: "El Paso · 5.4 km from centre",
+                priceUSD: 75,
+                rating: 8.6,
+                ratingText: "Fabulous",
+                reviews: 938,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+                lat: 31.7619,
+                lng: -106.4850
             },
             {
                 id: 2,
-                name: "Luxury Skyline Penthouse in NYC",
-                type: "Skyline Penthouse",
-                location: "New York",
-                address: "Central Park West, Manhattan, NY, USA",
-                priceUSD: 650,
-                rating: 4.98,
-                reviews: 98,
-                images: [
-                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80"
-                ],
-                lat: 40.7128,
-                lng: -74.0060
+                name: "Comfort Suites El Paso Airport",
+                type: "Suites",
+                location: "El Paso",
+                address: "El Paso · 8.9 km from centre",
+                priceUSD: 98,
+                rating: 8.2,
+                ratingText: "Very good",
+                reviews: 452,
+                image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80",
+                lat: 31.7820,
+                lng: -106.4250
             },
             {
                 id: 3,
-                name: "Beverly Hills Contemporary Estate",
-                type: "Luxury Mansion",
-                location: "Los Angeles",
-                address: "Beverly Hills, Los Angeles, CA, USA",
-                priceUSD: 850,
-                rating: 4.92,
-                reviews: 115,
-                images: [
-                    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80"
-                ],
-                lat: 34.0522,
-                lng: -118.2437
+                name: "Quality Inn & Suites Airport",
+                type: "Resort",
+                location: "El Paso",
+                address: "El Paso · 7.6 km from centre",
+                priceUSD: 85,
+                rating: 8.0,
+                ratingText: "Very good",
+                reviews: 920,
+                image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+                lat: 31.7710,
+                lng: -106.4450
             }
         ];
 
@@ -386,43 +415,49 @@
             calculateTotal();
         });
 
-        function formatPrice(amountUSD) {
-            return `$ ${amountUSD.toLocaleString()}`;
+        // Switch Navigation Tabs
+        function switchTab(tab) {
+            ['stays', 'flights', 'cars', 'attractions', 'taxis'].forEach(t => {
+                document.getElementById(`tab-${t}`).className = "flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition";
+                document.getElementById(`form-${t}`).classList.add('hidden');
+            });
+            document.getElementById(`tab-${tab}`).className = "flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 bg-white/10 font-semibold text-white whitespace-nowrap transition";
+            document.getElementById(`form-${tab}`).classList.remove('hidden');
         }
 
-        // Render Hotel List: Left Side Details, Right Side Image (Click photo to open details modal)
         function renderHotelList(data) {
             const container = document.getElementById('hotel-list');
             container.innerHTML = '';
 
             data.forEach(hotel => {
                 const card = document.createElement('div');
-                card.className = `bg-white rounded-2xl border ${selectedHotel.id === hotel.id ? 'border-2 border-blue-600 shadow-md' : 'border-slate-200'} p-4 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row gap-4 items-center`;
+                card.className = `bg-white rounded-xl border p-3 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row gap-4 cursor-pointer ${selectedHotel.id === hotel.id ? 'border-2 border-[#0071c2]' : 'border-slate-200'}`;
+                card.onclick = () => selectHotel(hotel.id);
                 
                 card.innerHTML = `
-                    <div class="w-full sm:w-7/12 flex flex-col justify-between space-y-2">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">${hotel.type}</span>
-                                <span class="text-xs text-amber-500 font-bold"><i class="fa-solid fa-star"></i> ${hotel.rating} (${hotel.reviews})</span>
-                            </div>
-                            <h3 onclick="selectHotel(${hotel.id})" class="text-sm font-bold text-slate-900 mt-1 cursor-pointer hover:text-blue-600">${hotel.name}</h3>
-                            <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot"></i> ${hotel.address}</p>
-                        </div>
-                        <div class="flex items-center justify-between border-t pt-2">
-                            <div>
-                                <span class="text-base font-black text-blue-950">${formatPrice(hotel.priceUSD)}</span>
-                                <span class="text-[10px] text-slate-400">/ night</span>
-                            </div>
-                            <button onclick="selectHotel(${hotel.id})" class="px-3 py-1.5 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs rounded-lg shadow">
-                                Select Stay
-                            </button>
-                        </div>
+                    <div class="sm:w-4/12 h-36 rounded-lg overflow-hidden relative">
+                        <img src="${hotel.image}" alt="${hotel.name}" class="w-full h-full object-cover">
                     </div>
-                    <div class="w-full sm:w-5/12 h-36 rounded-xl overflow-hidden relative cursor-pointer group" onclick="openDetailModal(${hotel.id})">
-                        <img src="${hotel.images[0]}" alt="${hotel.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition flex items-center justify-center">
-                            <span class="bg-black/60 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm opacity-0 group-hover:opacity-100 transition">View Details</span>
+                    <div class="sm:w-8/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-bold text-sm text-[#0071c2] hover:underline">${hotel.name}</h3>
+                                <div class="bg-[#003580] text-white text-xs font-bold px-1.5 py-0.5 rounded">${hotel.rating}</div>
+                            </div>
+                            <div class="flex items-center gap-1 text-amber-500 text-[10px] my-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot"></i> ${hotel.address}</p>
+                            <span class="inline-block mt-1 text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded">Genius loyalty discount applied</span>
+                        </div>
+                        <div class="flex items-end justify-between border-t pt-2 mt-2">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block">1 night, 2 adults</span>
+                                <span class="text-lg font-black text-slate-900">$ ${hotel.priceUSD}</span>
+                            </div>
+                            <button class="px-3 py-1.5 bg-[#0071c2] hover:bg-[#00487a] text-white font-bold text-xs rounded transition">
+                                See availability
+                            </button>
                         </div>
                     </div>
                 `;
@@ -430,12 +465,12 @@
             });
         }
 
-        // Initialize Map
         function initMap(data) {
-            map = L.map('map').setView([25.7617, -80.1918], 4);
+            map = L.map('map').setView([31.7619, -106.4850], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
+
             markersGroup = L.layerGroup().addTo(map);
             updateMapMarkers(data);
         }
@@ -444,10 +479,9 @@
             markersGroup.clearLayers();
             data.forEach(hotel => {
                 L.marker([hotel.lat, hotel.lng])
-                    .bindPopup(`<b>${hotel.name}</b><br>Rate: ${formatPrice(hotel.priceUSD)} / night`)
+                    .bindPopup(`<b>${hotel.name}</b><br>Rate: $${hotel.priceUSD} / night`)
                     .addTo(markersGroup);
             });
-            if (data.length > 0) map.setView([data[0].lat, data[0].lng], 5);
         }
 
         function selectHotel(id) {
@@ -455,36 +489,18 @@
             document.getElementById('selected-type').innerText = selectedHotel.type;
             document.getElementById('selected-title').innerText = selectedHotel.name;
             document.getElementById('selected-location').innerHTML = `<i class="fa-solid fa-location-dot text-slate-400"></i> ${selectedHotel.address}`;
-            document.getElementById('selected-price').innerText = formatPrice(selectedHotel.priceUSD);
+            document.getElementById('selected-price').innerText = `$ ${selectedHotel.priceUSD}`;
             renderHotelList(hotels);
             calculateTotal();
         }
 
-        // Click photo to open detail modal
-        function openDetailModal(id) {
-            const h = hotels.find(item => item.id === id);
-            document.getElementById('modal-title').innerText = h.name;
-            document.getElementById('modal-address').innerText = h.address;
-            document.getElementById('modal-rating').innerText = `${h.rating} / 5.0 (${h.reviews} reviews)`;
-            document.getElementById('modal-img-1').src = h.images[0];
-            document.getElementById('modal-img-2').src = h.images[1] || h.images[0];
-            document.getElementById('detail-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('detail-modal').classList.add('hidden');
-        }
-
         function filterHotels() {
             const query = document.getElementById('destination').value.toLowerCase().trim();
-            const filtered = hotels.filter(h => h.name.toLowerCase().includes(query) || h.location.toLowerCase().includes(query) || h.address.toLowerCase().includes(query));
+            const filtered = hotels.filter(h => h.location.toLowerCase().includes(query) || h.name.toLowerCase().includes(query));
             if (filtered.length > 0) {
                 renderHotelList(filtered);
                 updateMapMarkers(filtered);
                 selectHotel(filtered[0].id);
-            } else {
-                renderHotelList(hotels);
-                updateMapMarkers(hotels);
             }
         }
 
@@ -494,67 +510,66 @@
             let nights = Math.ceil(Math.abs(checkout - checkin) / (1000 * 60 * 60 * 24));
             if (isNaN(nights) || nights <= 0) nights = 1;
 
-            const roomCount = parseInt(document.getElementById('rooms').value) || 1;
             document.getElementById('calc-nights').innerText = nights;
-            document.getElementById('calc-rooms-count').innerText = roomCount;
 
             const roomSelect = document.getElementById('room-type-select');
-            const selectedOpt = roomSelect.options[roomSelect.selectedIndex];
-            const multiplier = parseFloat(selectedOpt.getAttribute('data-multiplier')) || 1;
-            const isAvailable = selectedOpt.getAttribute('data-available') === 'true';
+            const multiplier = parseFloat(roomSelect.options[roomSelect.selectedIndex].getAttribute('data-multiplier')) || 1;
 
-            const alertBox = document.getElementById('availability-alert');
-            const bookBtn = document.getElementById('book-now-btn');
-            const stockBadge = document.getElementById('stock-badge');
+            let baseCost = selectedHotel.priceUSD * multiplier * nights;
+            let tax = Math.round(baseCost * 0.10);
+            let total = baseCost + tax;
 
-            if (!isAvailable) {
-                alertBox.classList.remove('hidden');
-                stockBadge.className = 'bg-red-50 text-red-700 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-red-200 text-[10px]';
-                stockBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Out of Stock`;
-                bookBtn.disabled = true;
-                bookBtn.className = 'w-full bg-slate-300 text-slate-500 font-bold py-3.5 rounded-xl cursor-not-allowed text-xs uppercase';
-            } else {
-                alertBox.classList.add('hidden');
-                stockBadge.className = 'bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-amber-200 text-[10px]';
-                stockBadge.innerHTML = `<i class="fa-solid fa-box-open"></i> Limited Inventory`;
-                bookBtn.disabled = false;
-                bookBtn.className = 'w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider';
-            }
-
-            let baseCost = selectedHotel.priceUSD * multiplier * nights * roomCount;
-            let addonsCost = 0;
-            if (document.getElementById('addon-breakfast').checked) addonsCost += 35 * nights * roomCount;
-            if (document.getElementById('addon-pickup').checked) addonsCost += 90;
-
-            let total = baseCost + addonsCost;
-            document.getElementById('calc-base').innerText = formatPrice(baseCost);
-            document.getElementById('calc-addons').innerText = formatPrice(addonsCost);
-            document.getElementById('calc-total').innerText = formatPrice(total);
+            document.getElementById('calc-base').innerText = `$ ${Math.round(baseCost)}`;
+            document.getElementById('calc-tax').innerText = `$ ${tax}`;
+            document.getElementById('calc-total').innerText = `$ ${total}`;
         }
 
         function confirmBooking() {
+            const checkinVal = document.getElementById('checkin').value;
+            const checkoutVal = document.getElementById('checkout').value;
+            const totalVal = document.getElementById('calc-total').innerText;
+            const paymentVal = document.querySelector('input[name="payment"]:checked').value;
+            const roomText = document.getElementById('room-type-select').options[document.getElementById('room-type-select').selectedIndex].text;
+
             document.getElementById('v-hotel').innerText = selectedHotel.name;
             document.getElementById('v-location').innerText = selectedHotel.address;
-            document.getElementById('v-checkin').innerText = document.getElementById('checkin').value;
-            document.getElementById('v-checkout').innerText = document.getElementById('checkout').value;
-            document.getElementById('v-total').innerText = document.getElementById('calc-total').innerText;
+            document.getElementById('v-checkin').innerText = checkinVal;
+            document.getElementById('v-checkout').innerText = checkoutVal;
+            document.getElementById('v-room').innerText = roomText;
+            document.getElementById('v-total').innerText = totalVal;
+            document.getElementById('v-payment').innerText = paymentVal;
 
             const element = document.getElementById('pdf-voucher');
-            alert('Reservation confirmed successfully! Downloading PDF voucher...');
+            alert(`Booking Confirmed! (Paid via ${paymentVal})\nDownloading your PDF voucher now...`);
             html2pdf().from(element).save(`Booking_Voucher_${selectedHotel.name}.pdf`);
+        }
+
+        function scrollToMap() {
+            document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
         }
 
         function openChat() { document.getElementById('chat-modal').classList.remove('hidden'); }
         function closeChat() { document.getElementById('chat-modal').classList.add('hidden'); }
+
         function sendMessage() {
             const input = document.getElementById('chat-input');
-            if(!input.value) return;
-            const msgBox = document.getElementById('chat-messages');
-            msgBox.innerHTML += `<div class="bg-blue-100 p-2 rounded-lg text-right">${input.value}</div>`;
+            if (!input.value.trim()) return;
+            const chatMessages = document.getElementById('chat-messages');
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'bg-blue-900 text-white p-2 rounded-lg max-w-[80%] ml-auto';
+            userMsg.innerText = input.value;
+            chatMessages.appendChild(userMsg);
+            
             input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
             setTimeout(() => {
-                msgBox.innerHTML += `<div class="bg-white p-2 rounded-lg border">Thank you! A support representative will assist you shortly.</div>`;
-                msgBox.scrollTop = msgBox.scrollHeight;
+                const botMsg = document.createElement('div');
+                botMsg.className = 'bg-slate-100 p-2 rounded-lg max-w-[80%] text-slate-800';
+                botMsg.innerText = "Thank you for contacting Booking.com Support. A representative will be with you shortly.";
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 1000);
         }
     </script>
