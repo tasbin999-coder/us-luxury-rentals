@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
         #map { height: 100%; min-height: 400px; border-radius: 1rem; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -80,41 +79,31 @@
                 <span class="text-2xl font-black tracking-tight">StaySuite</span>
             </div>
             
-            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+            <nav class="flex items-center gap-8 font-semibold text-sm">
                 <a href="#search" class="hover:text-amber-400 transition-colors">Search Stays</a>
                 <a href="#featured" class="hover:text-amber-400 transition-colors">Popular Properties</a>
                 <a href="#map-section" class="hover:text-amber-400 transition-colors">Map View</a>
                 <a href="#reviews-section" class="hover:text-amber-400 transition-colors">Guest Reviews</a>
                 <a href="#support" class="hover:text-amber-400 transition-colors">Booking.com Support</a>
             </nav>
-
-            <div class="flex items-center gap-4">
-                <button class="px-3.5 py-2 text-xs font-bold border border-white/30 rounded-lg hover:bg-white/10 transition flex items-center gap-2">
-                    <i class="fa-solid fa-globe text-amber-400"></i> USD ($)
-                </button>
-                <button class="bg-amber-500 hover:bg-amber-600 text-blue-950 px-5 py-2.5 rounded-lg font-extrabold text-sm shadow-md transition">
-                    Sign In / Register
-                </button>
-            </div>
         </div>
     </header>
 
     <!-- Search Hero Bar -->
     <section id="search" class="bg-blue-950 text-white pb-16 pt-10 px-4">
         <div class="max-w-6xl mx-auto text-center mb-8">
-            <h1 class="text-3xl md:text-5xl font-black mb-3">Book Exclusive Luxury Homes & Villas</h1>
+            <!-- Premium Gradient Highlight Headline -->
+            <h1 class="text-3xl md:text-5xl font-black mb-3 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200 drop-shadow-md">
+                Book Exclusive Luxury Homes & Villas
+            </h1>
             <p class="text-blue-200 text-base md:text-lg">Guaranteed live rates with major US card support and 24/7 Booking.com care</p>
         </div>
 
         <div class="max-w-6xl mx-auto bg-white rounded-2xl p-4 sm:p-6 shadow-2xl text-slate-800 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <!-- Custom Search Text Input -->
             <div>
-                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5"><i class="fa-solid fa-location-dot text-amber-500"></i> Destination / City</label>
-                <select id="destination" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    <option value="Miami">Miami, Florida (US)</option>
-                    <option value="New York">New York City, NY (US)</option>
-                    <option value="Los Angeles">Los Angeles, CA (US)</option>
-                    <option value="Las Vegas">Las Vegas, NV (US)</option>
-                </select>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5"><i class="fa-solid fa-location-dot text-amber-500"></i> Search City / Location</label>
+                <input type="text" id="destination" placeholder="Enter any city or location..." class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
             </div>
 
             <div>
@@ -125,12 +114,14 @@
                 </div>
             </div>
 
+            <!-- Only Rooms Selection -->
             <div>
-                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5"><i class="fa-solid fa-user-group text-amber-500"></i> Guests & Rooms</label>
-                <select id="guests" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none">
-                    <option value="2">2 Guests, 1 Room</option>
-                    <option value="4">4 Guests, 2 Rooms</option>
-                    <option value="1">1 Guest, 1 Room</option>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5"><i class="fa-solid fa-door-open text-amber-500"></i> Rooms</label>
+                <select id="rooms" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none">
+                    <option value="1">1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                    <option value="4">4+ Rooms</option>
                 </select>
             </div>
 
@@ -414,8 +405,8 @@
 
             <div class="border-t border-b py-4 mb-6 space-y-2 text-sm">
                 <div class="flex justify-between">
-                    <span>Number of Guests:</span>
-                    <span id="v-guests" class="font-bold">2 Guests</span>
+                    <span>Stay Configuration:</span>
+                    <span id="v-guests" class="font-bold">Reserved Room(s)</span>
                 </div>
                 <div class="flex justify-between">
                     <span>Total Paid Amount:</span>
@@ -612,10 +603,10 @@
             calculateTotal();
         }
 
-        // Filter Hotels by Destination
+        // Filter Hotels by Custom Input Text
         function filterHotels() {
-            const dest = document.getElementById('destination').value;
-            const filtered = hotels.filter(h => h.location === dest);
+            const query = document.getElementById('destination').value.toLowerCase().trim();
+            const filtered = hotels.filter(h => h.location.toLowerCase().includes(query) || h.address.toLowerCase().includes(query) || h.name.toLowerCase().includes(query));
             
             if (filtered.length > 0) {
                 renderHotelList(filtered);
