@@ -92,7 +92,6 @@
     <!-- Search Hero Bar -->
     <section id="search" class="bg-blue-950 text-white pb-16 pt-10 px-4">
         <div class="max-w-6xl mx-auto text-center mb-8">
-            <!-- Premium Gradient Highlight Headline -->
             <h1 class="text-3xl md:text-5xl font-black mb-3 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200 drop-shadow-md">
                 Book Exclusive Luxury Homes & Villas
             </h1>
@@ -114,14 +113,14 @@
                 </div>
             </div>
 
-            <!-- Only Rooms Selection -->
+            <!-- Rooms Selection -->
             <div>
                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5"><i class="fa-solid fa-door-open text-amber-500"></i> Rooms</label>
-                <select id="rooms" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none">
+                <select id="rooms" onchange="calculateTotal()" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 font-semibold text-sm focus:outline-none">
                     <option value="1">1 Room</option>
                     <option value="2">2 Rooms</option>
                     <option value="3">3 Rooms</option>
-                    <option value="4">4+ Rooms</option>
+                    <option value="4">4 Rooms</option>
                 </select>
             </div>
 
@@ -223,7 +222,7 @@
                     </span>
                 </div>
 
-                <!-- English Professional Notice Alert -->
+                <!-- Notice Alert -->
                 <div id="availability-alert" class="hidden mb-4 p-3 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 space-y-1">
                     <p class="font-bold flex items-center gap-1.5 text-amber-800">
                         <i class="fa-solid fa-circle-exclamation text-amber-600 text-sm"></i> Notice: Selected Option Currently Unavailable
@@ -270,23 +269,19 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Calculation Summary -->
+                <!-- Dynamic Price Breakdown -->
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs mb-6">
                     <div class="flex justify-between text-slate-600">
-                        <span>Stay Duration (<span id="calc-nights">2</span> nights):</span>
+                        <span>Stay Duration (<span id="calc-nights">2</span> nights, <span id="calc-rooms-count">1</span> room):</span>
                         <span id="calc-base">$ 900</span>
                     </div>
                     <div class="flex justify-between text-slate-600">
                         <span>Extra Add-ons:</span>
                         <span id="calc-addons">$ 0</span>
                     </div>
-                    <div class="flex justify-between text-slate-600">
-                        <span>Taxes & Service Fees (10%):</span>
-                        <span id="calc-vat">$ 90</span>
-                    </div>
                     <div class="border-t pt-2 flex justify-between font-extrabold text-slate-900 text-base">
-                        <span>Total Estimated Price:</span>
-                        <span id="calc-total" class="text-blue-950">$ 990</span>
+                        <span>Total Price:</span>
+                        <span id="calc-total" class="text-blue-950">$ 900</span>
                     </div>
                 </div>
 
@@ -333,26 +328,29 @@
                 </button>
             </div>
 
-            <!-- Booking.com Support Section -->
+            <!-- Booking.com Partner & Customer Support Section -->
             <div id="support" class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white rounded-2xl p-6 shadow-xl border border-blue-800">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center font-bold text-blue-950 text-xl shadow">
                         <i class="fa-solid fa-headset"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-base">Booking.com Official Support</h4>
-                        <p class="text-xs text-blue-200">24/7 Global Partner Desk</p>
+                        <h4 class="font-bold text-base">Booking.com Partner Support</h4>
+                        <p class="text-xs text-blue-200">Official Customer & Partner Care</p>
                     </div>
                 </div>
                 <p class="text-xs text-blue-100 mb-4 leading-relaxed">
-                    For inquiries, date modifications, or customer care regarding properties featured on our portal, please chat directly with our official Booking.com partner support desk.
+                    For booking inquiries, cancellations, or support, access the official Booking.com partner help portals directly below.
                 </p>
                 <div class="space-y-2">
                     <button onclick="openChat()" class="w-full bg-amber-500 hover:bg-amber-600 text-blue-950 font-black py-3 rounded-xl text-xs shadow transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-comments"></i> Start Booking.com Live Chat
                     </button>
                     <a href="https://www.booking.com/help.html" target="_blank" rel="noopener noreferrer" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-xs text-center border border-white/20 transition block">
-                        <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Visit Booking.com Help Center
+                        <i class="fa-solid fa-circle-question mr-1"></i> Customer Help Center
+                    </a>
+                    <a href="https://partner.booking.com/" target="_blank" rel="noopener noreferrer" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-xs text-center border border-white/20 transition block">
+                        <i class="fa-solid fa-handshake mr-1"></i> Partner Hub & Support
                     </a>
                 </div>
             </div>
@@ -410,7 +408,7 @@
                 </div>
                 <div class="flex justify-between">
                     <span>Total Paid Amount:</span>
-                    <span id="v-total" class="font-bold text-blue-900">$ 990</span>
+                    <span id="v-total" class="font-bold text-blue-900">$ 900</span>
                 </div>
                 <div class="flex justify-between">
                     <span>Payment Status:</span>
@@ -630,7 +628,7 @@
             }
         }
 
-        // Calculate Total Price Dynamically & Check Availability State
+        // Calculate Total Price Dynamically (Without Taxes)
         function calculateTotal() {
             const checkin = new Date(document.getElementById('checkin').value);
             const checkout = new Date(document.getElementById('checkout').value);
@@ -639,7 +637,10 @@
             let nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             if (isNaN(nights) || nights <= 0) nights = 1;
 
+            const roomCount = parseInt(document.getElementById('rooms').value) || 1;
+
             document.getElementById('calc-nights').innerText = nights;
+            document.getElementById('calc-rooms-count').innerText = roomCount;
 
             // Room type multiplier & Availability check
             const roomSelect = document.getElementById('room-type-select');
@@ -671,21 +672,19 @@
             }
 
             let baseRate = selectedHotel.priceUSD * multiplier;
-            let baseCost = baseRate * nights;
+            let baseCost = baseRate * nights * roomCount;
             
-            let addonBreakfastUSD = 35 * nights;
+            let addonBreakfastUSD = 35 * nights * roomCount;
             let addonPickupUSD = 90;
             let addonsCost = 0;
 
             if (document.getElementById('addon-breakfast').checked) addonsCost += addonBreakfastUSD;
             if (document.getElementById('addon-pickup').checked) addonsCost += addonPickupUSD;
 
-            let vat = (baseCost + addonsCost) * 0.10;
-            let total = baseCost + addonsCost + vat;
+            let total = baseCost + addonsCost;
 
             document.getElementById('calc-base').innerText = formatPrice(baseCost);
             document.getElementById('calc-addons').innerText = formatPrice(addonsCost);
-            document.getElementById('calc-vat').innerText = formatPrice(vat);
             document.getElementById('calc-total').innerText = formatPrice(total);
         }
 
