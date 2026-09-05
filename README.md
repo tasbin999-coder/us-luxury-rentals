@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="15kFQKceUC9q3uR8hrpcRV6AF6ho5FjSFFWQKrHd2S8" />
     
     <title>US Luxury Rental - Official Site | Homes, Hotels & Travel Hub</title>
     
