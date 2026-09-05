@@ -19,7 +19,6 @@ html
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f5f5f5; }
         .bk-blue { background-color: #0b2545; }
-        .bk-blue-text { color: #0b2545; }
         .bk-yellow { background-color: #d4af37; }
         #map { height: 100%; min-height: 350px; border-radius: 0.75rem; }
     </style>
@@ -43,12 +42,12 @@ html
         </div>
 
         <!-- Sub Navigation Tabs -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto pb-3 text-sm no-scrollbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto pb-3 text-sm">
             <button onclick="switchTab('stays')" id="tab-stays" class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 bg-white/10 font-semibold text-white whitespace-nowrap transition">
                 <i class="fa-solid fa-bed"></i> Stays
             </button>
-            <button onclick="switchTab('flights')" id="tab-flights" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
-                <i class="fa-solid fa-plane"></i> Flights
+            <button onclick="switchTab('car-rentals')" id="tab-car-rentals" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
+                <i class="fa-solid fa-car"></i> Car rentals
             </button>
             <button onclick="switchTab('attractions')" id="tab-attractions" class="flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition">
                 <i class="fa-solid fa-ferris-wheel"></i> Attractions
@@ -92,14 +91,53 @@ html
                 </div>
             </div>
 
-            <!-- FLIGHTS FORM -->
-            <div id="form-flights" class="bg-[#d4af37] p-4 rounded-xl shadow-lg hidden">
-                <div class="bg-white rounded-lg p-4 space-y-3">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-                        <input type="text" placeholder="From where?" class="border p-2.5 rounded-lg text-sm font-semibold">
-                        <input type="text" placeholder="To where?" class="border p-2.5 rounded-lg text-sm font-semibold">
-                        <input type="date" value="2026-09-07" class="border p-2.5 rounded-lg text-sm font-semibold">
-                        <button class="bg-[#0b2545] text-white font-bold py-2.5 rounded-lg">Search flights</button>
+            <!-- CAR RENTALS FORM (Matching image 5 design layout) -->
+            <div id="form-car-rentals" class="bg-[#0b2545] p-4 rounded-xl shadow-lg hidden space-y-4 text-white">
+                <div>
+                    <h2 class="text-2xl font-extrabold">Car rentals for any kind of trip</h2>
+                    <p class="text-xs text-slate-300 mt-1">Great cars at great prices from the biggest rental companies</p>
+                </div>
+                <div class="bg-white text-slate-800 p-4 rounded-xl space-y-3">
+                    <div class="border rounded-lg p-2.5 flex items-center gap-3">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                        <input type="text" placeholder="Airport, city, or station" class="w-full text-sm font-semibold focus:outline-none bg-transparent">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border rounded-lg p-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days text-slate-400"></i>
+                            <div class="w-full">
+                                <label class="block text-[9px] text-slate-400 font-bold uppercase">Pick-up date</label>
+                                <input type="date" value="2026-09-07" class="text-xs font-bold w-full bg-transparent focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l pl-0 md:pl-2 pt-2 md:pt-0">
+                            <i class="fa-solid fa-clock text-slate-400"></i>
+                            <div class="w-full">
+                                <label class="block text-[9px] text-slate-400 font-bold uppercase">Time</label>
+                                <input type="text" value="10:00 AM" class="text-xs font-bold w-full bg-transparent focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border rounded-lg p-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days text-slate-400"></i>
+                            <div class="w-full">
+                                <label class="block text-[9px] text-slate-400 font-bold uppercase">Drop-off date</label>
+                                <input type="date" value="2026-09-10" class="text-xs font-bold w-full bg-transparent focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l pl-0 md:pl-2 pt-2 md:pt-0">
+                            <i class="fa-solid fa-clock text-slate-400"></i>
+                            <div class="w-full">
+                                <label class="block text-[9px] text-slate-400 font-bold uppercase">Time</label>
+                                <input type="text" value="10:00 AM" class="text-xs font-bold w-full bg-transparent focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-[#0071c2] hover:bg-[#005999] text-white font-bold py-3 rounded-lg shadow text-sm transition">Search cars</button>
+                    <div class="flex items-center gap-4 text-xs text-slate-600 pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox"> Drop car off at different location</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked> Driver aged 30 - 65?</label>
                     </div>
                 </div>
             </div>
@@ -116,7 +154,7 @@ html
         </div>
     </section>
 
-    <!-- Guest & Room Selection Modal (Image style) -->
+    <!-- Guest & Room Selection Modal -->
     <div id="guest-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-2xl p-6 w-80 sm:w-96 shadow-2xl relative space-y-5">
             <button onclick="toggleGuestModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-lg">
@@ -124,7 +162,6 @@ html
             </button>
             <h3 class="font-bold text-base text-slate-900 border-b pb-2">Select Guests & Rooms</h3>
             
-            <!-- Adults Counter -->
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-sm">Adults</span>
                 <div class="flex items-center gap-3 border rounded-lg px-3 py-1">
@@ -134,7 +171,6 @@ html
                 </div>
             </div>
 
-            <!-- Children Counter -->
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-sm">Children</span>
                 <div class="flex items-center gap-3 border rounded-lg px-3 py-1">
@@ -144,7 +180,6 @@ html
                 </div>
             </div>
 
-            <!-- Rooms Counter -->
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-sm">Rooms</span>
                 <div class="flex items-center gap-3 border rounded-lg px-3 py-1">
@@ -207,9 +242,9 @@ html
                 <div class="mb-4 space-y-2">
                     <label class="block text-xs font-bold text-slate-700">Select Room Type:</label>
                     <select id="room-type-select" onchange="calculateTotal()" class="w-full bg-slate-100 border rounded-lg p-2.5 text-xs font-semibold focus:outline-none">
-                        <option value="standard" data-multiplier="1">Executive Presidential Suite ($120/night)</option>
-                        <option value="executive" data-multiplier="1.5">Deluxe Ocean-View Penthouse ($180/night)</option>
-                        <option value="deluxe" data-multiplier="2">Royal Garden Villa ($240/night)</option>
+                        <option value="standard" data-multiplier="1">Executive Presidential Suite</option>
+                        <option value="executive" data-multiplier="1.5">Deluxe Ocean-View Penthouse</option>
+                        <option value="deluxe" data-multiplier="2">Royal Garden Villa</option>
                     </select>
                 </div>
 
@@ -346,8 +381,6 @@ html
 
         let selectedHotel = hotels[0];
         let map, markersGroup;
-
-        // Guest count states
         let counts = { adults: 2, children: 0, rooms: 1 };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -358,7 +391,7 @@ html
         });
 
         function switchTab(tab) {
-            ['stays', 'flights', 'attractions'].forEach(t => {
+            ['stays', 'car-rentals', 'attractions'].forEach(t => {
                 const tabBtn = document.getElementById(`tab-${t}`);
                 const formDiv = document.getElementById(`form-${t}`);
                 if(tabBtn) tabBtn.className = "flex items-center gap-2 px-4 py-2 rounded-full border border-transparent hover:bg-white/10 font-semibold text-white/90 whitespace-nowrap transition";
@@ -507,3 +540,4 @@ html
     </script>
 </body>
 </html>
+
