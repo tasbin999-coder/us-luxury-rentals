@@ -1,4 +1,3 @@
-html
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -71,7 +70,7 @@ html
     <section class="bk-blue pb-10 pt-4 px-3 sm:px-6">
         <div class="max-w-6xl mx-auto">
             
-            <!-- STAYS FORM (Hidden by default) -->
+            <!-- STAYS FORM -->
             <div id="form-stays" class="bg-[#febb02] p-2 rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-12 gap-2 hidden">
                 <div class="md:col-span-4 bg-white rounded-lg p-2.5 flex items-center gap-3">
                     <i class="fa-solid fa-bed text-slate-400 text-lg"></i>
@@ -105,62 +104,56 @@ html
                 </div>
             </div>
 
-            <!-- CAR RENTALS FORM (Updated like the screenshot) -->
+            <!-- CAR RENTALS FORM -->
             <div id="form-cars" class="bg-[#febb02] p-3 rounded-xl shadow-lg space-y-2">
-                <!-- Location Input -->
                 <div class="bg-white rounded-lg p-2.5 flex items-center gap-3">
                     <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg"></i>
                     <div class="w-full">
                         <label class="block text-[10px] font-bold text-slate-500 uppercase">Pick-up location</label>
-                        <input type="text" placeholder="Airport, city, or station" value="El Paso Airport (ELP)" class="w-full font-semibold text-sm focus:outline-none bg-transparent">
+                        <input type="text" id="car-location" placeholder="Airport, city, or station" value="El Paso Airport (ELP)" class="w-full font-semibold text-sm focus:outline-none bg-transparent">
                     </div>
                 </div>
 
-                <!-- Date & Time Row -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    <!-- Pick-up -->
                     <div class="bg-white rounded-lg p-2 flex items-center justify-between border">
                         <div class="flex items-center gap-2 w-7/12">
                             <i class="fa-solid fa-calendar-days text-slate-400 text-base"></i>
                             <div>
                                 <label class="block text-[9px] font-bold text-slate-500 uppercase">Pick-up date</label>
-                                <input type="date" value="2026-09-07" class="font-semibold text-xs focus:outline-none bg-transparent">
+                                <input type="date" id="car-pickup-date" value="2026-09-07" onchange="calculateTotal()" class="font-semibold text-xs focus:outline-none bg-transparent">
                             </div>
                         </div>
                         <div class="flex items-center gap-1 w-5/12 border-l pl-2">
                             <i class="fa-regular fa-clock text-slate-400 text-base"></i>
                             <div>
                                 <label class="block text-[9px] font-bold text-slate-500 uppercase">Time</label>
-                                <input type="time" value="10:00" class="font-semibold text-xs focus:outline-none bg-transparent">
+                                <input type="time" id="car-pickup-time" value="10:00" class="font-semibold text-xs focus:outline-none bg-transparent">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Drop-off -->
                     <div class="bg-white rounded-lg p-2 flex items-center justify-between border">
                         <div class="flex items-center gap-2 w-7/12">
                             <i class="fa-solid fa-calendar-days text-slate-400 text-base"></i>
                             <div>
                                 <label class="block text-[9px] font-bold text-slate-500 uppercase">Drop-off date</label>
-                                <input type="date" value="2026-09-10" class="font-semibold text-xs focus:outline-none bg-transparent">
+                                <input type="date" id="car-dropoff-date" value="2026-09-10" onchange="calculateTotal()" class="font-semibold text-xs focus:outline-none bg-transparent">
                             </div>
                         </div>
                         <div class="flex items-center gap-1 w-5/12 border-l pl-2">
                             <i class="fa-regular fa-clock text-slate-400 text-base"></i>
                             <div>
                                 <label class="block text-[9px] font-bold text-slate-500 uppercase">Time</label>
-                                <input type="time" value="10:00" class="font-semibold text-xs focus:outline-none bg-transparent">
+                                <input type="time" id="car-dropoff-time" value="10:00" class="font-semibold text-xs focus:outline-none bg-transparent">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Search Button -->
-                <button class="w-full bg-[#0071c2] hover:bg-[#00487a] text-white font-bold py-3 rounded-lg shadow transition text-sm">
-                    Search
+                <button onclick="calculateTotal()" class="w-full bg-[#0071c2] hover:bg-[#00487a] text-white font-bold py-3 rounded-lg shadow transition text-sm">
+                    Search & Update Pricing
                 </button>
 
-                <!-- Checkboxes (Like Screenshot) -->
                 <div class="space-y-1.5 pt-1 text-xs font-semibold text-slate-900">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" class="w-4 h-4 rounded text-blue-600 focus:ring-0"> Drop car off at different location
@@ -171,7 +164,7 @@ html
                 </div>
             </div>
 
-            <!-- FLIGHTS FORM (Hidden by default) -->
+            <!-- FLIGHTS FORM -->
             <div id="form-flights" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
                 <div class="bg-white rounded-lg p-4 space-y-3">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
@@ -183,7 +176,7 @@ html
                 </div>
             </div>
 
-            <!-- ATTRACTIONS FORM (Hidden by default) -->
+            <!-- ATTRACTIONS FORM -->
             <div id="form-attractions" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
                 <div class="bg-white rounded-lg p-4 grid grid-cols-1 md:grid-cols-3 gap-2">
                     <input type="text" placeholder="Where are you going?" class="border p-2.5 rounded-lg text-sm font-semibold">
@@ -192,7 +185,7 @@ html
                 </div>
             </div>
 
-            <!-- TAXIS FORM (Hidden by default) -->
+            <!-- TAXIS FORM -->
             <div id="form-taxis" class="bg-[#febb02] p-4 rounded-xl shadow-lg hidden">
                 <div class="bg-white rounded-lg p-4 grid grid-cols-1 md:grid-cols-4 gap-2">
                     <input type="text" placeholder="Enter pick-up location" class="border p-2.5 rounded-lg text-sm font-semibold">
@@ -220,10 +213,8 @@ html
                 </button>
             </div>
 
-            <!-- Rental List Container -->
             <div id="hotel-list" class="space-y-4"></div>
 
-            <!-- Map View Section -->
             <div id="map-section" class="bg-white p-4 rounded-xl border shadow-sm mt-6">
                 <h3 class="font-bold text-sm mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-map-pin text-red-500"></i> Interactive Car Rental Map
@@ -402,7 +393,7 @@ html
             renderHotelList(hotels);
             initMap(hotels);
             calculateTotal();
-            switchTab('cars'); // Default open cars tab based on your request
+            switchTab('cars');
         });
 
         function switchTab(tab) {
@@ -442,7 +433,7 @@ html
                         </div>
                         <div class="flex items-end justify-between border-t pt-2 mt-2">
                             <div>
-                                <span class="text-[10px] text-slate-400 block">3 days rental</span>
+                                <span class="text-[10px] text-slate-400 block">Per day rate</span>
                                 <span class="text-lg font-black text-slate-900">$ ${hotel.priceUSD} <span class="text-xs font-normal text-slate-500">/ day</span></span>
                             </div>
                             <button class="px-3 py-1.5 bg-[#0071c2] hover:bg-[#00487a] text-white font-bold text-xs rounded transition">
@@ -485,7 +476,19 @@ html
         }
 
         function calculateTotal() {
-            let days = 3; // default rental days
+            // Calculate days dynamically based on inputs
+            const pickupDateVal = document.getElementById('car-pickup-date').value;
+            const dropoffDateVal = document.getElementById('car-dropoff-date').value;
+            
+            let days = 3;
+            if (pickupDateVal && dropoffDateVal) {
+                const start = new Date(pickupDateVal);
+                const end = new Date(dropoffDateVal);
+                const diffTime = end - start;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays > 0) days = diffDays;
+            }
+
             document.getElementById('calc-nights').innerText = days;
 
             const roomSelect = document.getElementById('room-type-select');
@@ -503,19 +506,24 @@ html
         function confirmBooking() {
             const totalVal = document.getElementById('calc-total').innerText;
             const paymentVal = document.querySelector('input[name="payment"]:checked').value;
-            const roomText = document.getElementById('room-type-select').options[document.getElementById('room-type-select')->selectedIndex].text;
+            const roomSelectElem = document.getElementById('room-type-select');
+            const roomText = roomSelectElem.options[roomSelectElem.selectedIndex].text;
+
+            const pickupDate = document.getElementById('car-pickup-date').value;
+            const dropoffDate = document.getElementById('car-dropoff-date').value;
+            const pickupTime = document.getElementById('car-pickup-time').value;
 
             document.getElementById('v-hotel').innerText = selectedHotel.name;
             document.getElementById('v-location').innerText = selectedHotel.address;
-            document.getElementById('v-checkin').innerText = "2026-09-07 10:00 AM";
-            document.getElementById('v-checkout').innerText = "2026-09-10 10:00 AM";
+            document.getElementById('v-checkin').innerText = `${pickupDate} ${pickupTime}`;
+            document.getElementById('v-checkout').innerText = `${dropoffDate} ${pickupTime}`;
             document.getElementById('v-room').innerText = roomText;
             document.getElementById('v-total').innerText = totalVal;
-            document.getElementById('v-payment').innerText = paymentVal;
+            document.getElementById('v-payment').innerText = paymentVal + ' Card';
 
             const element = document.getElementById('pdf-voucher');
             alert(`Car Rental Confirmed! (Paid via ${paymentVal})\nDownloading your PDF voucher now...`);
-            html2pdf().from(element).save(`Car_Rental_Voucher_${selectedHotel.name}.pdf`);
+            html2pdf().from(element).save(`Car_Rental_Voucher_${selectedHotel.name.replace(/\s+/g, '_')}.pdf`);
         }
 
         function scrollToMap() {
