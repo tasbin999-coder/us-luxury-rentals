@@ -5,6 +5,17 @@
     
     <title>US Luxury Rental - Official Site | Hotels & Luxury Stays</title>
     
+    <!-- Travelpayouts Tracking Script -->
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
+      (function () {
+          var script = document.createElement("script");
+          script.async = 1;
+          script.setAttribute("data-cmp-ab","2");
+          script.src = 'https://emrldco.com/NTcwNTg1.js?t=570585';
+          document.head.appendChild(script);
+      })();
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -230,8 +241,8 @@
 
                 <div class="flex justify-between items-center mb-4 bg-slate-50 p-3 rounded-lg border">
                     <div>
-                        <span class="text-xs text-slate-500 block">Status</span>
-                        <span class="text-sm font-black text-emerald-700">Available to Reserve via Booking.com</span>
+                        <span class="text-xs text-slate-500 block">Rate per night</span>
+                        <span id="selected-price" class="text-xl font-black text-slate-900">$ 120</span>
                     </div>
                     <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">
                         <i class="fa-solid fa-check"></i> Free cancellation
@@ -240,45 +251,48 @@
 
                 <div class="mb-4 space-y-2">
                     <label class="block text-xs font-bold text-slate-700">Select Room Type:</label>
-                    <select id="room-type-select" class="w-full bg-slate-100 border rounded-lg p-2.5 text-xs font-semibold focus:outline-none">
-                        <option value="standard">Executive Presidential Suite</option>
-                        <option value="executive">Deluxe Ocean-View Penthouse</option>
-                        <option value="deluxe">Royal Garden Villa</option>
+                    <select id="room-type-select" onchange="calculateTotal()" class="w-full bg-slate-100 border rounded-lg p-2.5 text-xs font-semibold focus:outline-none">
+                        <option value="standard" data-multiplier="1">Executive Presidential Suite</option>
+                        <option value="executive" data-multiplier="1.5">Deluxe Ocean-View Penthouse</option>
+                        <option value="deluxe" data-multiplier="2">Royal Garden Villa</option>
                     </select>
                 </div>
 
+                <div class="bg-slate-50 p-3 rounded-lg border space-y-1.5 text-xs mb-4">
+                    <div class="flex justify-between text-slate-600">
+                        <span>Duration (<span id="calc-nights">0</span> nights):</span>
+                        <span id="calc-base">$ 0</span>
+                    </div>
+                    <div class="border-t pt-2 flex justify-between font-extrabold text-slate-900 text-sm">
+                        <span>Total Price:</span>
+                        <span id="calc-total" class="text-[#0b2545]">$ 0</span>
+                    </div>
+                </div>
+
                 <div class="mb-4">
-                    <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Select Payment Method (Redirects to Booking.com Affiliate):</label>
-                    <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Accepted Payment Cards:</label>
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
                             <input type="radio" name="payment" value="Visa" checked class="hidden">
-                            <i class="fa-brands fa-cc-visa text-blue-700 text-xl mb-1"></i> Visa Card
+                            <i class="fa-brands fa-cc-visa text-blue-700 text-lg"></i> Visa
                         </label>
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
                             <input type="radio" name="payment" value="Mastercard" class="hidden">
-                            <i class="fa-brands fa-cc-mastercard text-red-600 text-xl mb-1"></i> Mastercard
+                            <i class="fa-brands fa-cc-mastercard text-red-600 text-lg"></i> Master
                         </label>
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
                             <input type="radio" name="payment" value="Amex" class="hidden">
-                            <i class="fa-brands fa-cc-amex text-cyan-600 text-xl mb-1"></i> Amex Card
+                            <i class="fa-brands fa-cc-amex text-cyan-600 text-lg"></i> Amex
                         </label>
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
+                        <label class="border rounded p-1.5 cursor-pointer bg-white font-bold flex flex-col items-center">
                             <input type="radio" name="payment" value="PayPal" class="hidden">
-                            <i class="fa-brands fa-paypal text-blue-800 text-xl mb-1"></i> PayPal
-                        </label>
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
-                            <input type="radio" name="payment" value="ApplePay" class="hidden">
-                            <i class="fa-brands fa-apple-pay text-slate-900 text-xl mb-1"></i> Apple Pay
-                        </label>
-                        <label class="border rounded p-2 cursor-pointer bg-white font-bold flex flex-col items-center hover:bg-slate-50 transition">
-                            <input type="radio" name="payment" value="GooglePay" class="hidden">
-                            <i class="fa-brands fa-google-pay text-blue-600 text-xl mb-1"></i> Google Pay
+                            <i class="fa-brands fa-paypal text-blue-800 text-lg"></i> PayPal
                         </label>
                     </div>
                 </div>
 
-                <button onclick="confirmBooking()" class="w-full bg-[#0071c2] hover:bg-[#005999] text-white font-bold py-3.5 rounded-lg shadow transition flex items-center justify-center gap-2 text-sm">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Book Now via Booking.com Affiliate
+                <button onclick="confirmBooking()" class="w-full bg-[#0b2545] hover:bg-[#13315c] text-white font-bold py-3.5 rounded-lg shadow transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-lock"></i> Reserve Room & Get PDF Voucher
                 </button>
             </div>
         </div>
@@ -289,12 +303,12 @@
         <div id="pdf-voucher" class="p-8 bg-white text-slate-800 max-w-2xl mx-auto border-2 border-slate-200">
             <div class="flex justify-between items-center border-b pb-4 mb-6">
                 <div>
-                    <h1 class="text-2xl font-bold text-[#0b2545]">US Luxury Rental / Booking.com</h1>
-                    <p class="text-xs text-slate-500">Official Affiliate Reservation Voucher</p>
+                    <h1 class="text-2xl font-bold text-[#0b2545]">US Luxury Rental</h1>
+                    <p class="text-xs text-slate-500">Official Reservation Confirmation Voucher</p>
                 </div>
                 <div class="text-right">
-                    <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">AFFILIATE REDIRECTED</span>
-                    <p class="text-xs text-slate-400 mt-1">Ref ID: <span id="voucher-id">USL-842910</span></p>
+                    <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">CONFIRMED</span>
+                    <p class="text-xs text-slate-400 mt-1">Confirmation No: <span id="voucher-id">USL-842910</span></p>
                 </div>
             </div>
 
@@ -316,17 +330,17 @@
                     <span id="v-room" class="font-bold">Executive Presidential Suite</span>
                 </div>
                 <div class="flex justify-between">
-                    <span>Selected Payment Method:</span>
-                    <span id="v-payment" class="font-bold text-blue-600">Visa Card</span>
+                    <span>Total Amount Paid:</span>
+                    <span id="v-total" class="font-bold text-[#0b2545]">$ 0</span>
                 </div>
                 <div class="flex justify-between">
-                    <span>Status:</span>
-                    <span class="font-bold text-emerald-600">Forwarded to Booking.com Secure Checkout</span>
+                    <span>Payment Method:</span>
+                    <span id="v-payment" class="font-bold text-emerald-600">Visa Card</span>
                 </div>
             </div>
 
             <div class="flex justify-between items-center text-xs text-slate-500">
-                <p>For support or inquiries, visit Booking.com Partner Help Center.<br>Official Affiliate Platform</p>
+                <p>For support or inquiries, visit US Luxury Rental Help Center.<br>Official Booking Platform</p>
                 <div class="w-16 h-16 bg-slate-200 flex items-center justify-center font-bold text-slate-400 text-[10px]">QR CODE</div>
             </div>
         </div>
@@ -343,6 +357,7 @@
                 type: "Luxury Suite",
                 location: "El Paso",
                 address: "El Paso Downtown · Premium View",
+                priceUSD: 120,
                 rating: 9.2,
                 image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
                 lat: 31.7619,
@@ -354,6 +369,7 @@
                 type: "Penthouse",
                 location: "El Paso",
                 address: "El Paso Hilltop · Private Balcony",
+                priceUSD: 180,
                 rating: 9.5,
                 image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
                 lat: 31.7820,
@@ -365,6 +381,7 @@
                 type: "Private Villa",
                 location: "El Paso",
                 address: "El Paso Suburbs · Swimming Pool",
+                priceUSD: 240,
                 rating: 9.8,
                 image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
                 lat: 31.7710,
@@ -379,6 +396,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderHotelList(hotels);
             initMap(hotels);
+            calculateTotal();
             switchTab('stays');
         });
 
@@ -434,15 +452,15 @@
                                 <div class="bg-[#0b2545] text-white text-xs font-bold px-1.5 py-0.5 rounded">${hotel.rating}</div>
                             </div>
                             <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-location-dot"></i> ${hotel.address}</p>
-                            <span class="inline-block mt-1 text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded">Free WiFi</span>
+                            <span class="inline-block mt-1 text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded">Free WiFi & Breakfast</span>
                         </div>
                         <div class="flex items-end justify-between border-t pt-2 mt-2">
                             <div>
-                                <span class="text-[10px] text-slate-400 block">Booking partner</span>
-                                <span class="text-xs font-bold text-[#0071c2]">View live rates on Booking.com</span>
+                                <span class="text-[10px] text-slate-400 block">Per night rate</span>
+                                <span class="text-lg font-black text-slate-900">$ ${hotel.priceUSD} <span class="text-xs font-normal text-slate-500">/ night</span></span>
                             </div>
                             <button class="px-3 py-1.5 bg-[#0b2545] hover:bg-[#13315c] text-white font-bold text-xs rounded transition">
-                                Select room
+                                View room
                             </button>
                         </div>
                     </div>
@@ -465,7 +483,7 @@
             markersGroup.clearLayers();
             data.forEach(hotel => {
                 L.marker([hotel.lat, hotel.lng])
-                    .bindPopup(`<b>${hotel.name}</b><br>Available on Booking.com`)
+                    .bindPopup(`<b>${hotel.name}</b><br>Rate: $${hotel.priceUSD} / night`)
                     .addTo(markersGroup);
             });
         }
@@ -475,13 +493,41 @@
             document.getElementById('selected-type').innerText = selectedHotel.type;
             document.getElementById('selected-title').innerText = selectedHotel.name;
             document.getElementById('selected-location').innerHTML = `<i class="fa-solid fa-location-dot text-slate-400"></i> ${selectedHotel.address}`;
+            document.getElementById('selected-price').innerText = `$ ${selectedHotel.priceUSD}`;
             renderHotelList(hotels);
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            const checkinVal = document.getElementById('checkin').value;
+            const checkoutVal = document.getElementById('checkout').value;
+            
+            let nights = 0;
+            if (checkinVal && checkoutVal) {
+                const start = new Date(checkinVal);
+                const end = new Date(checkoutVal);
+                const diffTime = end - start;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays > 0) nights = diffDays;
+            }
+
+            document.getElementById('calc-nights').innerText = nights;
+
+            const roomSelect = document.getElementById('room-type-select');
+            const multiplier = parseFloat(roomSelect.options[roomSelect.selectedIndex].getAttribute('data-multiplier')) || 1;
+
+            let baseCost = selectedHotel.priceUSD * multiplier * nights;
+
+            document.getElementById('calc-base').innerText = `$ ${Math.round(baseCost)}`;
+            document.getElementById('calc-total').innerText = `$ ${Math.round(baseCost)}`;
         }
 
         function confirmBooking() {
+            const totalVal = document.getElementById('calc-total').innerText;
             const paymentVal = document.querySelector('input[name="payment"]:checked').value;
             const roomSelectElem = document.getElementById('room-type-select');
             const roomText = roomSelectElem.options[roomSelectElem.selectedIndex].text;
+
             const checkinDate = document.getElementById('checkin').value;
             const checkoutDate = document.getElementById('checkout').value;
 
@@ -490,16 +536,12 @@
             document.getElementById('v-checkin').innerText = checkinDate;
             document.getElementById('v-checkout').innerText = checkoutDate;
             document.getElementById('v-room').innerText = roomText;
+            document.getElementById('v-total').innerText = totalVal;
             document.getElementById('v-payment').innerText = paymentVal + ' Card';
 
-            // Affiliate tracking redirect simulation to Booking.com
-            const affiliateId = "your_affiliate_id"; // Replace with your actual Booking.com affiliate ID
-            const bookingComUrl = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(selectedHotel.name)}&checkin=${checkinDate}&checkout=${checkoutDate}&group_adults=${counts.adults}&group_children=${counts.children}&no_rooms=${counts.rooms}&aid=${affiliateId}&payment_method=${paymentVal.toLowerCase()}`;
-
-            alert(`Redirecting to Booking.com secure affiliate checkout via ${paymentVal}...\nYou will now complete your payment directly on Booking.com.`);
-            
-            // Open Booking.com affiliate link in a new tab/window
-            window.open(bookingComUrl, '_blank');
+            const element = document.getElementById('pdf-voucher');
+            alert(`Stay Confirmed! (Paid via ${paymentVal})\nDownloading your PDF voucher now...`);
+            html2pdf().from(element).save(`US_Luxury_Rental_Voucher_${selectedHotel.name.replace(/\s+/g, '_')}.pdf`);
         }
 
         function scrollToMap() {
